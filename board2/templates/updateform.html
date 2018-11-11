@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <title>글 수정하기</title>
+    <style>
+    body {
+      background-color: rgba(0,0,0,0.8);
+      background-image: url("../../bg2.jpg");
+      background-size: cover;
+      background-position: top center;
+    }
+    h1 {
+      color : #fff;
+    }
+
+    div{
+      color : #f3f;
+    }
+    </style>
+    <script>
+        function check(){
+            if(form1.name.value==""){
+                alert("이름을 입력해 주세요!");
+                form1.name.focus();
+                return;
+            }
+            if(form1.title.value==""){
+                alert("제목을 입력해 주세요!");
+                form1.title.focus();
+                return;
+            }
+            if(form1.content.value==""){
+                alert("내용을 입력해 주세요!");
+                form1.content.focus();
+                return;
+            }
+            if(form1.pwd.value==""){
+                alert("비밀번호를 입력해 주세요!");
+                form1.pwd.focus();
+                return;
+            }
+            form1.submit()
+        }  //자바스크립트 주석
+    </script>
+</head>
+<body>
+    <h1>글 수정하기</h1>
+    <form action="/update" method="POST" name="form1">
+    <table border="1" style="width: 55em; text-align: center; color: #fff">
+        <tr>
+            <th>이름</th>
+            <td>
+                <input type="hidden" name='num' value ="{{row.num}}">
+                <input type="hidden" nam='page' value = "{{page}}">
+                <input type="text" name="name" value ="{{row.name}}"></td>
+        </tr>
+        <tr>
+            <th>제목</th>
+            <td><input type="text" name="title" value="{{row.title}}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td><textarea name="content" cols="100" rows="10">{{row.content}}</textarea></td>
+        </tr>
+        <tr>
+            <th>비밀번호</th>
+            <td><input type="password" name="pwd"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" value="수정" onclick="check()">
+                <input type="reset" value="취소">
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

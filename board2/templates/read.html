@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/assets/css/main.css" />
+    <title>게시판 읽기</title>
+    <style>
+    body {
+      background-color: rgba(0,0,0,0.8);
+      background-image: url("../../bg2.jpg");
+      background-size: cover;
+      background-position: top center;
+    }
+    h1 {
+      color : #fff;
+    }
+
+    div{
+      color : #f3f;
+    }
+    </style>
+    <script>
+        function go_update() {
+            location.href = "/updateform/{{row.num}}/{{page}}"
+        }
+        function go_delete(){
+            location.href = "/deleteform/{{row.num}}/{{page}}"
+        }
+        function go_comment(){
+            location.href = "/commentform/{{row.num}}/{{page}}"
+        }
+    </script>
+
+</head>
+<body>
+    <h1>북악관 앞 게시판</h1>
+    <a href="/list/{{page}}"><button>리스트</button></a><br><br>
+    <table border="1" style="width: 55em; text-align: center; color: #fff">
+        <tr>
+            <th>제목</th>
+            <td>{{row.title}}</td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td>{{row.content}}</td>
+        </tr>
+        <tr>
+            <th>글쓴이</th>
+            <td>{{row.name}}</td>
+        </tr>
+        <tr>
+            <th>조회수</th>
+            <td>{{row.hit}}</td>
+        </tr>
+        <tr>
+            <th>날짜</th>
+            <td>{{row.regdate}}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type= 'button' value="수정" onclick="go_update()">
+                <input type= 'button' value="삭제" onclick="go_delete()">
+                <input type= 'button' value="댓글" onclick="go_comment()">
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        <ul>
+            {% for c in comments %}
+            <li>이름 : {{c.c_name}} 내용 : {{c.c_content}} </li>
+            {% endfor %}
+        </ul>
+    </div>
+  </body>
+
+</html>

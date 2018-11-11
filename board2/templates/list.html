@@ -1,0 +1,70 @@
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <title>인연만들기 프로젝트</title>
+    <style>
+    body {
+      background-color: #000;
+      background-image: url("../static/images/bg.jpg");
+      background-size: cover;
+      background-position: top center;
+    }
+    h1 {
+      color : #fff;
+    }
+    </style>
+</head>
+<body>
+    <h1>게시판</h1>
+    <a href="/writeform"><button>글쓰기</button></a><br><br>
+    <table border="1" style="width: 55em; text-align: center; color: #fff">
+        <tr>
+            <th>글번호</th>
+            <th>제목</th>
+            <th>글쓴이</th>
+            <th>날짜</th>
+            <th>조회수</th>
+        </tr>
+        {% for r in datas.rows %}
+            <tr>
+                <td>{{r.num}}</td>
+                <td><a href="/read/{{r.num}}/{{datas.page}}">{{r.title}}</a></td>
+                <td>{{r.name}}</td>
+                <td>{{r.regdate}}</td>
+                <td>{{r.hit}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        <div style="width: 50em; text-align: center; padding-top: 5px;">
+            {# 서버사이드주석 #}
+            {% if datas.page > datas.link_size %}
+            [ <a href="/list/1" style="text-decoration: none;">◀◀</a> ]
+            [ <a href="/list/{{datas.start_link-1}}">◀</a> ]
+            {% else %}
+            [ <span style="color: cadetblue;">◀◀</span> ]
+            [ <span style="color: cadetblue;">◀</span> ]
+            {% endif %}
+            &nbsp;&nbsp;
+            {% for i in range(datas.start_link,datas.end_link+1) %}
+                {% if i  ==datas.page %}
+                [<span style="color: cadetblue;">{{i}}</span>]
+                {% else %}
+                [ <a href="/list/{{i}}" style="text-decoration: none;">{{i}}</a> ]
+                {% endif %}
+            {% endfor %}
+            &nbsp;&nbsp;
+            {% if datas.total_page > datas.end_link %}
+            [<a href='/list/{{datas.end_link+1}}' style="text-decoration: none;">▶</a>]
+            [<a href='/list/{{datas.total_page}}' style="text-decoration: none;">▶▶</a>]
+            {% else %}
+            [ <span style="color: cadetblue;">▶▶</span> ]
+            [ <span style="color: cadetblue;">▶</span> ]
+            {% endif %}
+        </div>
+    </body>
+
+</html>

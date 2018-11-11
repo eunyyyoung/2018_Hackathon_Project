@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="static/assets/css/main.css" rel="stylesheet">
+    <title>게시글 삭제</title>
+    <style>
+    body {
+      background-color: rgba(0,0,0,0.8);
+      background-image: url("../../bg2.jpg");
+      background-size: cover;
+      background-position: top center;
+    }
+    h1 {
+      color : #fff;
+    }
+
+    div{
+      color : #f3f;
+    }
+    </style>
+    <script>
+        function check(){
+            if(form1.pwd.value == ""){
+                alert("비밀번호를 꼭 입력하세요 !");
+                form1.pwd.focus();
+                return;
+            }
+            form1.submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>게시글 삭제</h1>
+    <a href = "/list">LIST</a><br><br>
+    <form action="/delete" method="post" name='form1'>
+        <input type="hidden" name = "num" value="{{num}}">
+        <input type="hidden" name="page" value="{{page}}">
+        비밀번호 : <input type = "password" name="pwd"><p/>
+        <input type = "button" value="삭제" onclick="check()">
+        <input type ="reset" value="취소">
+    </form>
+
+</body>
+</html>
